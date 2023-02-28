@@ -5,45 +5,23 @@ import java.util.*;
 
 class Solution {
 
-    public int expressiveWords(String S, String[] words) {
-        if (S == null || words == null) {
-            return 0;
-        }
-        int count = 0;
-        for (String word : words) {
-            if (stretchy(S, word)) {
-                count++;
-            }
-        }
-        return count;
-    }
+    public int maximumPopulation(int[][] logs) {
 
-    public boolean stretchy(String S, String word) {
-        if (word == null) {
-            return false;
-        }
-        int i = 0;
-        int j = 0;
-        while (i < S.length() && j < word.length()) {
-            if (S.charAt(i) == word.charAt(j)) {
-                int len1 = getRepeatedLength(S, i);
-                int len2 = getRepeatedLength(word, j);
-                if (len1 < 3 && len1 != len2 || len1 >= 3 && len1 < len2) {
-                    return false;
+        int[] pair = new int[] {0, 1950};
+        for (int i = 1950 ; i <= 2050; i++){
+            int count = 0;
+            for (int k = 0 ; k < logs.length; k++){
+                if (i >= logs[k][0] && i < logs[k][1]){
+                    count++;
                 }
-                i += len1;
-                j += len2;
-            } else {
-                return false;
+            }
+
+            if (count > pair[0]){
+                pair[0] = count;
+                pair[1] = i;
             }
         }
-        return i == S.length() && j == word.length();
-    }
 
-    public int getRepeatedLength(String str, int i) {
-        int j = i;
-        while (j < str.length() && str.charAt(j) == str.charAt(i)) {
-            j++;
-        }
-        return j - i;
-    }}
+        return pair[1];
+    }
+}
