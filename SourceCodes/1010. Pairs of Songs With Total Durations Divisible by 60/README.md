@@ -2,7 +2,7 @@
 # Explenation
 
 what's happening on the following java vode ?
-```
+``` java
 public int numPairsDivisibleBy60(int[] time) {
         int c[]  = new int[60], res = 0;
         for (int t : time) {
@@ -30,27 +30,26 @@ Here's how it works:
 
 Suppose we have two integers a and b such that a % 60 = x and b % 60 = y. We want to find out if the sum of a and b is divisible by 60, i.e., (a + b) % 60 = 0. We can rewrite this as:
 
-```
+``` java
 a % 60 + b % 60 = 60k
 ```
 where k is an integer.
 
 Substituting a % 60 = x and b % 60 = y, we get:
 
-```
+```java
 x + y = 60k - (a - x) - (b - y)
 ```
 
 Note that (a - x) and (b - y) are integers that are divisible by 60 because a and b are both divisible by 60. Therefore, their difference is also divisible by 60. So, we can rewrite the above equation as:
 
-```
+```java
 x + y = 60k - (a - x) - (b - y) = 60k - (a + b - x - y)
 ```
 
 Now, if we let c = (a + b) % 60, we can rewrite the above equation as:
 
-```
-
+``` java
 x + y = 60k - c
 ```
 
@@ -58,8 +57,7 @@ This means that if we can find c such that 60k - c = x + y, then (a + b) % 60 = 
 
 To simplify this expression, we can rewrite 60k - c as ((k - 1) * 60) + (60 - c). Therefore, if we let m = (60 - x) % 60, we have:
 
-```
-
+``` java
 60k - c = x + y
        = x + (60 - x % 60) % 60  (substituting y with its complement)
        = x + m
@@ -67,7 +65,7 @@ To simplify this expression, we can rewrite 60k - c as ((k - 1) * 60) + (60 - c)
 
 Substituting c with ((k - 1) * 60) + (60 - c) and simplifying, we get:
 
-```
+``` java
 k * 60 = x + m + ((k - 1) * 60) + (60 - c)
 c = (600 - t) % 60
 ```
@@ -108,7 +106,7 @@ To find such a "y", we can rewrite "x + y = 60k" as "y = 60k - x". Since "y" has
 
 Now, let's substitute "t % 60 = x" and "u % 60 = y" in the equation "(t + u) % 60 = 0". We get:
 
-```
+``` java
 (t % 60 + u % 60) % 60 = 0
 (x + y) % 60 = 0
 ```
@@ -134,7 +132,7 @@ To find the complement of "t % 60", we need to find an integer "y" such that "x 
 
 Now, we want to express "y" in terms of "t". We can substitute "t = 60k + x" into the equation for "y" to get:
 
-```
+``` java
 y = 60k - x
   = 60k - (t % 60)
   = 60k - (t - 60k) % 60
