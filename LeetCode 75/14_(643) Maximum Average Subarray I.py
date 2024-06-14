@@ -1,4 +1,5 @@
-def findMaxAverage(nums, k):
+class Solution(object):
+    def findMaxAverage(self, nums, k):
         """
         :type nums: List[int]
         :type k: int
@@ -6,8 +7,8 @@ def findMaxAverage(nums, k):
         """
 
 
-        avg = 0
-        initial_avg = 0
+        avg = 0.0
+        initial_avg = 0.0
 
         for i in range(k):
             avg += nums[i]
@@ -19,14 +20,10 @@ def findMaxAverage(nums, k):
         temp = avg
         
         for j in range(k, len(nums)):
-            print(j)
             temp = temp - tail + nums[j]
             tail = nums[j-k+1]
             if temp > avg:
                 avg = temp 
-        print(avg/k)
+
         return avg/k
-    
-i = [1,12,-5,-6,50,3]
-k = 4
-findMaxAverage(i, k)
+        
