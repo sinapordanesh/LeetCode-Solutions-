@@ -15,7 +15,10 @@ class Solution(object):
             else:
                 hmap[occurance] = 1
                 occurance = 1
-                if occurance in hmap:
-                    return False
                 first = i
-        return True
+        hmap[occurance] = 1
+
+        if len(hmap) != len(set(arr)):
+            return False
+        else:
+            return True
