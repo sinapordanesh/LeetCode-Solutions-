@@ -4,18 +4,12 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        
-        slist = list(s)
+        stack = []
+        for char in s:
+            if char == "*":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(char)
 
-        for i in range(1, len(slist)):
-            if slist[i] == '*':
-                j = i - 1
-                while slist[j] == " ":
-                    j -= 1
-                slist[j] = " "
-                slist[i] = " "
-        
-        result1 = "".join(slist)
-        result2 = result1.replace(" ","")
-
-        return result2
+        return ''.join(stack)
