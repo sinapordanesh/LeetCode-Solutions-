@@ -4,38 +4,17 @@ class Solution(object):
         :type asteroids: List[int]
         :rtype: List[int]
         """
-        stack = []
-
+        res = []
         for asteroid in asteroids:
-            if not stack:
-                stack.append(asteroid)
-                continue
-            
-            previous = stack.pop()
-            
-            if asteroid*previous > 0:
-                stack.append(previous)
-                stack.append(asteroid)
-                continue
-            else:
-                winner, withdraw = None, None
-                while asteroid*previous < 0:
-                    if abs(asteroid) < abs(previous):
-                        winner = previous
-                        break
-                    elif abs(asteroid) > abs(previous):
-                        previous = stack.pop()
-                        # winner = None
-                    else:
-                        withdraw = 1
-                        break
-
-                if winner:
-                    stack.append(winner)
-                elif withdraw:
+            while len(res) and asteroid < 0 and res[-1] > 0:
+                if res[-1] == -asteroid: 
+                    res.pop()
+                    break
+                elif res[-1] < -asteroid:
+                    res.pop()
                     continue
-                else:
-                    stack.append(previous)
-                    stack.appen(asteroid)
-
-        return stack
+                elif res[-1] > -asteroid:
+                    break
+            else:
+                res.append(asteroid)
+        return res
