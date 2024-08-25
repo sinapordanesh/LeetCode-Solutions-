@@ -9,35 +9,20 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: int
         """
-        couner = head
-        c = 0
-        while counter.next:
-            c += 1
-            counter = counter.next
+        slow, fast = head, head
 
-        halfnode = head
-        for i in range(c/2):
-            halfnode = halfnode.next
-        
-        current = halfnode.next.next
-        previous = halfnode.next 
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
-        while current:
-            next = curret.next
-            current.next = previous 
-            previous = current 
-            current = next
+        curr, prev = slow, None
 
-        halfnode.next = previous 
+        while curr:
+            curr.next, prev, curr = prev, curr, curr.next
 
-        start = head
-        twin = halfnode.next
-        maximum = start.val + twin.val
-        for j in range(c/2):
-            start = start.next
-            twin = twin.next
-            temp = start.val + twin.val
-            if temp > maximun:
-                maximun = temp
+        maxim = 0
+        while prev:
+            maxim = max(maxim, head.val + prev.val)
+            prev, head = prev.next,  head.next
 
-        return maximun
+        return maxim
