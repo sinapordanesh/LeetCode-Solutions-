@@ -31,3 +31,21 @@ class Solution(object):
 
         return self.goods
         
+    # Alternative solution, the recursive function is embeded onto the goodNodes
+    # def goodNodes(self, root: TreeNode) -> int:
+    #     if not root:
+    #         return 0
+        
+    #     def dfs(node, curMax):
+    #         if not node:
+    #             return
+    #         if node.val >= curMax:
+    #             count[0] += 1
+    #             curMax = node.val
+    #         dfs(node.left, curMax)
+    #         dfs(node.right, curMax)
+        
+    #     count = [0]
+    #     dfs(root, root.val)
+        
+    #     return count[0]
