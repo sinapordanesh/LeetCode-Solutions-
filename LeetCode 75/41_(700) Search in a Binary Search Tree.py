@@ -11,20 +11,10 @@ class Solution(object):
         :type val: int
         :rtype: TreeNode
         """
-        self.result = []
-
-        def search(root):
-            if not root:
-                return None
-            self.result.append(root.val)
-            search(root.left)
-            search(root.right)
-            
-        while root.val != val: 
-            if val < root.val:
-                root = root.left
-            else:
-                root = root.right
-        search(root)
-
-        return self.result
+        if not root or root.val == val:
+            return root
+        
+        if val < root.val:
+            return self.searchBST(root.left, val)
+        else:
+            return self.searchBST(root.right, val)
