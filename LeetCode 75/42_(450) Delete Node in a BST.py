@@ -12,48 +12,26 @@ class Solution(object):
         :rtype: TreeNode
         """
         if not root: 
-            return root
-
-        curr = root
-        prev = root
-
-        while curr and curr.val != key: 
-            prev = curr
-            if key < curr.val:
-                curr = curr.left
-            else: 
-                curr =  curr.right
-        if not curr or not prev: 
-            return root
-
-        if curr.right != None:
-            if curr.left != None:
-                right = None
-                rnext = curr.right
-                left = curr.left
-                while rnext != None:
-                    right = rnext
-                    rnext = rnext.left
-                if key == prev.left.val:
-                    prev.left = curr.right
-                else:
-                    prev.right = curr.right
-                right.left = left 
-            else:
-                if key == prev.left.val:
-                    prev.left = curr.right
-                else:
-                    prev.right = curr.right
-        elif curr.left != None:
-            if key == prev.left.val:
-                prev.left = curr.left
-            else:
-                prev.right = curr.left
+            return None
+        
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
         else:
-            if key == prev.left.val:
-                prev.left = None
-            else:
-                prev.right = None
-
-
+            if not root.left:
+                return root.right
+            elif not root.right:
+                return root.left
+            
+            min_node = self.findMin(root.right)
+            root.val = min_node.val
+            root.right = self.deleteNode(root.right, min_node.val)
+            
         return root
+            
+    def findMin(self, node):
+        curr = node
+        while curr.left:
+            current = curr.left
+        return curr        
