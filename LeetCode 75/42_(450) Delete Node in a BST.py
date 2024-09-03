@@ -33,5 +33,5 @@ class Solution(object):
     def findMin(self, node):
         curr = node
         while curr.left:
-            current = curr.left
+            curr = curr.left
         return curr        
