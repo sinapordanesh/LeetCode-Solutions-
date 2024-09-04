@@ -4,17 +4,13 @@ class Solution(object):
         :type rooms: List[List[int]]
         :rtype: bool
         """
-        key_list = [0] * len(rooms)
+        visited = set()
+        
+        def visiting(room):
+            visited.add(room)
+            for i in rooms[room]:
+                if i not in visited:
+                    visiting(i)
 
-        for i in range(len(rooms)):
-            if i != 0: 
-                if key_list[i] == 1:
-                    for key in rooms[i]:
-                        key_list[key] = 1
-                else: 
-                    return False
-            else: 
-                for key in rooms[i]:
-                        key_list[key] = 1
-                        
-        return True
+        visiting(0)
+        return len(visited) == len(rooms)
