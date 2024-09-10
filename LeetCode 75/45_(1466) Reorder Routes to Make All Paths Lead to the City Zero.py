@@ -5,7 +5,7 @@ class Solution(object):
         :type connections: List[List[int]]
         :rtype: int
         """
-        
+        # self.connection = connections
         self.edges = { (a, b) for a, b in connections}
         self.neighbors = { city:[] for city in range(n)}
         self.visit = set()
@@ -16,12 +16,9 @@ class Solution(object):
             self.neighbors[b].append(a)
 
         def dfs(city):
-            # nonlocal edges
-
             for neighbor in self.neighbors[city]:
                 if neighbor in self.visit: 
                     continue
-                
                 if (neighbor, city) not in self.edges:
                     self.change += 1
                 
