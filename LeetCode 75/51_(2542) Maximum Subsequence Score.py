@@ -1,3 +1,5 @@
+import heapq
+
 class Solution(object):
     def maxScore(self, nums1, nums2, k):
         """
@@ -7,17 +9,20 @@ class Solution(object):
         :rtype: int
         """
 
-        hmap = {nums2[i]: nums1[i] for i in range(len(nums1))}
+        # pairs = list(zip(nums1, nums2))
+        # pairs.sort(key=lambda x: x[1], reverse=True)
 
-        sorted_list = sorted(hmap.items(), key=lambda x: x[1], reverse=True)
-        top_k = sorted_list[:k]
+        sum_nums1 = 0
+        max_score = 0
+        min_heap = []
 
-        product = 1
-        for _, value in top_k:
-            product += value
+        for num1, num2 in sorted(list(zip(nums1, nums2)), key=lambda x: x[1], reverse=True):
+            heapq.heappush(min_heap, num1)
+            sum_nums1 += num1
 
-        min_num2 = min(key for key, _ in top_k)
-
-        return product * min_num2
-
+            if len(min_heap) > k: 
+                sum_nums1 -= heapq.heappop(min_heap)
+            if len(min_heap) == k:
+                max_score = max(max_score, sum_nums1*num2)
         
+        return max_score
