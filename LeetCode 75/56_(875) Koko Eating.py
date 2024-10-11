@@ -6,21 +6,18 @@ class Solution(object):
         :type h: int
         :rtype: int
         """
-        n = len(piles)
+        l, r = 1, max(piles)
+        result = r
+        while l <= r:
+            m = (l+r) // 2
+            hours = 0
+            for pile in piles: 
+                hours += math.ceil(float(pile)/m)
 
-        if n == h: return max(piles)
-        if n == 1: return math.ceil(n/h)
-        ser_piles = [(x, 1) for x in piles]
-        ser_piles = sorted(ser_piles, key=lambda x: x[0])
-        j = h - n
-        i = n-1
-        while j != 0: 
-            curr = ser_piles[i][0]
-            b = ser_piles[i][1]
-            ser_piles[i] = ((curr*b)//(b+1), b+1)
-            j -= 1
-            if ser_piles[i][0] >= ser_piles[i-1][0]: continue
-            else: i -= 1
+            if hours <= h: 
+                result = m
+                r = m - 1
+            else: 
+                l = m + 1
 
-        return math.ceil(max(ser_piles, key=lambda x: x[0])[0])  
-    
+        return result
